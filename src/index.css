@@ -1,0 +1,190 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+/* Be Vietnam Pro per src/docs/01-implementation-prompt.md. Static weights, so each one is
+   a separate import; each ships latin / latin-ext / vietnamese gated by unicode-range, so
+   the browser only downloads the subsets it actually renders. */
+@import '@fontsource/be-vietnam-pro/400.css';
+@import '@fontsource/be-vietnam-pro/500.css';
+@import '@fontsource/be-vietnam-pro/600.css';
+@import '@fontsource/be-vietnam-pro/700.css';
+@import '@fontsource/be-vietnam-pro/800.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+
+  /* Product tokens — see CLAUDE.md "Design tokens". */
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-tint: var(--tint);
+  --color-tint-ink: var(--tint-ink);
+  --color-open: var(--open);
+  --color-open-tint: var(--open-tint);
+  --color-star: var(--star);
+  --color-skel: var(--skel);
+  --radius-chip: 999px;
+  --radius-card: 16px;
+  --radius-sheet: 22px;
+  --shadow-warm: 0 6px 18px rgba(60, 35, 20, 0.08);
+  --shadow-segment: 0 1px 3px rgba(60, 35, 20, 0.1);
+  --spacing-safe-b: env(safe-area-inset-bottom);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Tailwind preflight reads this via var(); declaring it here (not in @theme inline,
+     which only inlines values) stops its default stack winning anywhere. */
+  --default-font-family: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+
+  /* The palette. Do not introduce colours outside this list. */
+  --bg: #fbf7f2;
+  --surface: #ffffff;
+  --surface-2: #f3ebe3;
+  --ink: #2b1d15;
+  --ink-2: #6a5446;
+  --ink-3: #cdbcaf;
+  --line: #e8ddd3;
+  --tint: #f7e4da;
+  --tint-ink: #8c3c1e;
+  --open: #1d7a4c;
+  --open-tint: #e2f2e8;
+  --star: #c27a12;
+  --scrim: rgba(28, 18, 12, 0.48);
+  --skel: #ede3d9;
+
+  /* shadcn/ui semantics mapped onto the palette. The docs' --on-primary is
+       --primary-foreground here, which is the name the primitives already use. */
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: #b4532f;
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--ink-2);
+  --accent: var(--tint);
+  --accent-foreground: var(--tint-ink);
+  --destructive: #b3261e;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--primary);
+  --radius: 0.875rem;
+  --chart-1: #b4532f;
+  --chart-2: #1d7a4c;
+  --chart-3: #c27a12;
+  --chart-4: #8c3c1e;
+  --chart-5: #6a5446;
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--tint);
+  --sidebar-accent-foreground: var(--tint-ink);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--primary);
+}
+
+.dark {
+  --bg: #16110e;
+  --surface: #221a15;
+  --surface-2: #2e241d;
+  --ink: #f4eae2;
+  --ink-2: #c4b1a3;
+  --ink-3: #5e4d42;
+  --line: #3b2f27;
+  --tint: #3c271d;
+  --tint-ink: #f6b898;
+  --open: #66cc98;
+  --open-tint: #173220;
+  --star: #f0b24a;
+  --scrim: rgba(0, 0, 0, 0.62);
+  --skel: #2f261f;
+
+  --primary: #e8906a;
+  --primary-foreground: #1b0f09;
+  --destructive: #f2b8b5;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  /* iOS Safari zooms the viewport on focus below 16px. The design shows 15px;
+     16px here is deliberate and overrides it. */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+  button {
+    touch-action: manipulation;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+/* Sheet chrome from the design. Overridden by data-slot so components/ui/drawer.tsx
+   stays untouched and regenerable by the shadcn CLI. */
+[data-slot='drawer-overlay'] {
+  background-color: var(--scrim);
+  backdrop-filter: none;
+}
+
+[data-slot='drawer-content'] {
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  background-color: var(--surface);
+}
