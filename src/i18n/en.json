@@ -1,0 +1,194 @@
+{
+  "nav": {
+    "discover": "Discover",
+    "map": "Map",
+    "saved": "Saved",
+    "account": "Account",
+    "comingSoon": "Coming soon"
+  },
+  "discover": {
+    "searchPlaceholder": "Search dishes or places…",
+    "categoryAll": "All",
+    "categoryFood": "Food",
+    "categoryCafe": "Cafés",
+    "filters": "Filters",
+    "sortPrefix": "Sort:",
+    "clearAll": "Clear all",
+    "loadingMore": "Loading more…",
+    "endOfList": "That's everything",
+    "viewCards": "Card view",
+    "viewTable": "Table view",
+    "viewMap": "Map view"
+  },
+  "quick": {
+    "openNow": "Open now",
+    "cheap": "Budget",
+    "aircon": "Air-conditioned",
+    "work": "Good for work",
+    "parking": "Bike parking",
+    "rating45": "Rated 4.5+"
+  },
+  "sort": {
+    "title": "Sort",
+    "relevant": "Most relevant",
+    "nearest": "Nearest",
+    "rating": "Highest rated",
+    "priceAsc": "Price: low → high",
+    "priceDesc": "Price: high → low",
+    "newest": "Newly opened"
+  },
+  "filter": {
+    "title": "Filters",
+    "price": "Price",
+    "priceHint1": "Under 50,000₫",
+    "priceHint2": "50,000 – 150,000₫",
+    "priceHint3": "Over 150,000₫",
+    "cuisine": "Dishes",
+    "vibe": "Café atmosphere",
+    "hours": "Opening hours",
+    "openNow": "Open now",
+    "openLate": "Open late (after 22:00)",
+    "open24h": "Open 24h",
+    "distance": "Distance",
+    "distanceFrom": "From {{street}}",
+    "minRating": "Minimum rating",
+    "ratingAny": "Any",
+    "amenities": "Amenities",
+    "noResults": "No results"
+  },
+  "cuisine": {
+    "pho": "Phở",
+    "bun": "Bún",
+    "comtam": "Cơm tấm",
+    "banhmi": "Bánh mì",
+    "lau": "Lẩu",
+    "nuong": "Nướng",
+    "chay": "Chay",
+    "haisan": "Hải sản"
+  },
+  "cuisineHint": {
+    "pho": "noodle soup",
+    "bun": "rice noodles",
+    "comtam": "broken rice",
+    "banhmi": "baguette sandwich",
+    "lau": "hotpot",
+    "nuong": "grilled",
+    "chay": "vegetarian",
+    "haisan": "seafood"
+  },
+  "tag": {
+    "work": "Good for work",
+    "wifi": "Strong wifi",
+    "aircon": "Air-conditioned",
+    "parking": "Bike parking",
+    "outdoor": "Outdoor seating",
+    "quiet": "Quiet",
+    "group": "Good for groups",
+    "late": "Open late"
+  },
+  "location": {
+    "title": "Choose an area",
+    "searchPlaceholder": "Search district, ward or street…",
+    "searchHint": "Former names work too, e.g. \"Phường Võ Thị Sáu\"",
+    "useCurrent": "Use my current location",
+    "locating": "Finding your location…",
+    "locateDenied": "Location unavailable. Please choose manually.",
+    "recent": "Recent",
+    "level1": "Area",
+    "level2": "Ward",
+    "level3": "Near street…",
+    "level1Hint": "Pick a district or area of the city",
+    "level2Hint": "Pick a ward — former names also match",
+    "level3Hint": "Pick a street to see places nearby",
+    "oldName": "Formerly: {{name}}",
+    "newNameBadge": "New name",
+    "seePlaces": "See places in this area",
+    "noMatches": "No areas found"
+  },
+  "place": {
+    "pending": "Pending review",
+    "food": "Food",
+    "cafe": "Café",
+    "open": "Open",
+    "closed": "Closed",
+    "until": "until {{time}}",
+    "opensAt": "opens at {{time}}",
+    "open24h": "Open 24h",
+    "perPerson": "~{{price}}/person",
+    "priceLevelLabel": "Price level {{level}} of 3",
+    "noRating": "Not yet rated",
+    "save": "Save",
+    "saved": "Saved",
+    "directions": "Directions",
+    "share": "Share",
+    "linkCopied": "Link copied",
+    "notFound": "This place could not be found"
+  },
+  "media": {
+    "add": "Add photos",
+    "tabAll": "All",
+    "tabFood": "Food",
+    "tabSpace": "Interior",
+    "tabMenu": "Menu",
+    "tabVideo": "Video",
+    "empty": "No photos yet. Be the first to share one!",
+    "counter": "{{current}} / {{total}}"
+  },
+  "empty": {
+    "title": "No places match",
+    "help": "Try relaxing a filter or widening the search radius.",
+    "expand": "Expand to 3 km",
+    "clearAll": "Clear all",
+    "addPlace": "Add a place you know"
+  },
+  "error": {
+    "title": "Couldn't load the list",
+    "help": "Check your connection and try again.",
+    "retry": "Try again"
+  },
+  "count": {
+    "results_one": "{{count}} place in {{area}}",
+    "results_other": "{{count}} places in {{area}}",
+    "selected_one": "{{count}} selected",
+    "selected_other": "{{count}} selected",
+    "showResults_one": "Show {{count}} result",
+    "showResults_other": "Show {{count}} results",
+    "wards_one": "{{count}} new ward · tap to view",
+    "wards_other": "{{count}} new wards · tap to view",
+    "reviews_one": "({{count}})",
+    "reviews_other": "({{count}})",
+    "mediaTitle_one": "Photo & video · {{count}}",
+    "mediaTitle_other": "Photos & video · {{count}}",
+    "viewMedia_one": "View {{count}} photo & video",
+    "viewMedia_other": "View {{count}} photos & videos"
+  },
+  "common": {
+    "close": "Close",
+    "back": "Back",
+    "apply": "Apply",
+    "loading": "Loading…"
+  },
+  "a11y": {
+    "openFilters": "Open filters",
+    "openSort": "Open sort options",
+    "openLocation": "Choose an area",
+    "save": "Save place",
+    "unsave": "Remove from saved",
+    "removeFilter": "Remove the {{name}} filter",
+    "back": "Go back",
+    "playVideo": "Play video"
+  },
+  "apiError": {
+    "40001": "Some of the submitted data is invalid.",
+    "40101": "Your session has expired. Please sign in again.",
+    "40301": "That request could not be completed. Reload the page and try again.",
+    "42901": "Too many requests. Wait a minute and try again.",
+    "50001": "Something went wrong. Please try again."
+  },
+  "loginError": {
+    "40102": "You cancelled Google sign-in.",
+    "40103": "Google sign-in failed. Please try again.",
+    "40302": "That Google account is not allowed to sign in here.",
+    "50002": "A server error occurred. Try again in a few minutes."
+  }
+}

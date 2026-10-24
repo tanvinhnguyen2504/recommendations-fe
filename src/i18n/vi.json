@@ -1,0 +1,194 @@
+{
+  "nav": {
+    "discover": "Khám phá",
+    "map": "Bản đồ",
+    "saved": "Đã lưu",
+    "account": "Tài khoản",
+    "comingSoon": "Sắp ra mắt"
+  },
+  "discover": {
+    "searchPlaceholder": "Tìm món, tên quán…",
+    "categoryAll": "Tất cả",
+    "categoryFood": "Quán ăn",
+    "categoryCafe": "Cà phê",
+    "filters": "Bộ lọc",
+    "sortPrefix": "Sắp xếp:",
+    "clearAll": "Xóa tất cả",
+    "loadingMore": "Đang tải thêm…",
+    "endOfList": "Đã xem hết danh sách",
+    "viewCards": "Dạng thẻ",
+    "viewTable": "Dạng bảng",
+    "viewMap": "Dạng bản đồ"
+  },
+  "quick": {
+    "openNow": "Đang mở",
+    "cheap": "Giá rẻ",
+    "aircon": "Có máy lạnh",
+    "work": "Phù hợp làm việc",
+    "parking": "Có chỗ đậu xe máy",
+    "rating45": "Đánh giá 4,5+"
+  },
+  "sort": {
+    "title": "Sắp xếp",
+    "relevant": "Phù hợp nhất",
+    "nearest": "Gần nhất",
+    "rating": "Đánh giá cao nhất",
+    "priceAsc": "Giá thấp → cao",
+    "priceDesc": "Giá cao → thấp",
+    "newest": "Mới mở"
+  },
+  "filter": {
+    "title": "Bộ lọc",
+    "price": "Mức giá",
+    "priceHint1": "Dưới 50.000₫",
+    "priceHint2": "50.000 – 150.000₫",
+    "priceHint3": "Trên 150.000₫",
+    "cuisine": "Món ăn",
+    "vibe": "Không gian quán cà phê",
+    "hours": "Giờ mở cửa",
+    "openNow": "Đang mở",
+    "openLate": "Mở khuya (sau 22:00)",
+    "open24h": "Mở 24h",
+    "distance": "Khoảng cách",
+    "distanceFrom": "Tính từ {{street}}",
+    "minRating": "Đánh giá tối thiểu",
+    "ratingAny": "Bất kỳ",
+    "amenities": "Tiện ích",
+    "noResults": "Không có kết quả"
+  },
+  "cuisine": {
+    "pho": "Phở",
+    "bun": "Bún",
+    "comtam": "Cơm tấm",
+    "banhmi": "Bánh mì",
+    "lau": "Lẩu",
+    "nuong": "Nướng",
+    "chay": "Chay",
+    "haisan": "Hải sản"
+  },
+  "cuisineHint": {
+    "pho": "",
+    "bun": "",
+    "comtam": "",
+    "banhmi": "",
+    "lau": "",
+    "nuong": "",
+    "chay": "",
+    "haisan": ""
+  },
+  "tag": {
+    "work": "Phù hợp làm việc",
+    "wifi": "Wifi mạnh",
+    "aircon": "Có máy lạnh",
+    "parking": "Có chỗ đậu xe máy",
+    "outdoor": "Có chỗ ngoài trời",
+    "quiet": "Yên tĩnh",
+    "group": "Đi nhóm",
+    "late": "Mở khuya"
+  },
+  "location": {
+    "title": "Chọn khu vực",
+    "searchPlaceholder": "Tìm quận, phường, tên đường…",
+    "searchHint": "Tìm được cả tên cũ, ví dụ \"Phường Võ Thị Sáu\"",
+    "useCurrent": "Dùng vị trí hiện tại",
+    "locating": "Đang xác định vị trí…",
+    "locateDenied": "Không truy cập được vị trí. Bạn chọn thủ công nhé.",
+    "recent": "Gần đây",
+    "level1": "Khu vực",
+    "level2": "Phường",
+    "level3": "Gần đường…",
+    "level1Hint": "Chọn quận hoặc khu vực trong thành phố",
+    "level2Hint": "Chọn phường — tìm được cả tên cũ",
+    "level3Hint": "Chọn đường để xem quán gần đó",
+    "oldName": "Tên cũ: {{name}}",
+    "newNameBadge": "Tên mới",
+    "seePlaces": "Xem quán ở khu vực này",
+    "noMatches": "Không tìm thấy khu vực nào"
+  },
+  "place": {
+    "pending": "Chờ duyệt",
+    "food": "Quán ăn",
+    "cafe": "Cà phê",
+    "open": "Đang mở",
+    "closed": "Đã đóng",
+    "until": "đến {{time}}",
+    "opensAt": "mở lúc {{time}}",
+    "open24h": "Mở 24h",
+    "perPerson": "~{{price}}/người",
+    "priceLevelLabel": "Mức giá {{level}} trên 3",
+    "noRating": "Chưa có đánh giá",
+    "save": "Lưu",
+    "saved": "Đã lưu",
+    "directions": "Chỉ đường",
+    "share": "Chia sẻ",
+    "linkCopied": "Đã copy liên kết",
+    "notFound": "Không tìm thấy quán này"
+  },
+  "media": {
+    "add": "Thêm ảnh",
+    "tabAll": "Tất cả",
+    "tabFood": "Món ăn",
+    "tabSpace": "Không gian",
+    "tabMenu": "Thực đơn",
+    "tabVideo": "Video",
+    "empty": "Chưa có ảnh nào. Bạn là người đầu tiên chia sẻ nhé!",
+    "counter": "{{current}} / {{total}}"
+  },
+  "empty": {
+    "title": "Chưa có quán nào khớp",
+    "help": "Thử nới bộ lọc hoặc mở rộng khoảng cách tìm kiếm.",
+    "expand": "Mở rộng lên 3 km",
+    "clearAll": "Xóa tất cả",
+    "addPlace": "Thêm quán bạn biết"
+  },
+  "error": {
+    "title": "Không tải được danh sách",
+    "help": "Kiểm tra kết nối rồi thử lại.",
+    "retry": "Thử lại"
+  },
+  "count": {
+    "results_one": "{{count}} quán tại {{area}}",
+    "results_other": "{{count}} quán tại {{area}}",
+    "selected_one": "{{count}} đang chọn",
+    "selected_other": "{{count}} đang chọn",
+    "showResults_one": "Xem {{count}} kết quả",
+    "showResults_other": "Xem {{count}} kết quả",
+    "wards_one": "{{count}} phường mới · chọn để xem",
+    "wards_other": "{{count}} phường mới · chọn để xem",
+    "reviews_one": "({{count}})",
+    "reviews_other": "({{count}})",
+    "mediaTitle_one": "Ảnh & video · {{count}}",
+    "mediaTitle_other": "Ảnh & video · {{count}}",
+    "viewMedia_one": "Xem {{count}} ảnh & video",
+    "viewMedia_other": "Xem {{count}} ảnh & video"
+  },
+  "common": {
+    "close": "Đóng",
+    "back": "Quay lại",
+    "apply": "Áp dụng",
+    "loading": "Đang tải…"
+  },
+  "a11y": {
+    "openFilters": "Mở bộ lọc",
+    "openSort": "Mở sắp xếp",
+    "openLocation": "Chọn khu vực",
+    "save": "Lưu quán",
+    "unsave": "Bỏ lưu quán",
+    "removeFilter": "Bỏ bộ lọc {{name}}",
+    "back": "Quay lại",
+    "playVideo": "Phát video"
+  },
+  "apiError": {
+    "40001": "Dữ liệu gửi lên không hợp lệ.",
+    "40101": "Phiên đăng nhập đã hết. Vui lòng đăng nhập lại.",
+    "40301": "Không thực hiện được yêu cầu. Tải lại trang rồi thử lại.",
+    "42901": "Quá nhiều yêu cầu. Chờ một phút rồi thử lại.",
+    "50001": "Có lỗi xảy ra. Vui lòng thử lại."
+  },
+  "loginError": {
+    "40102": "Bạn đã hủy đăng nhập Google.",
+    "40103": "Đăng nhập Google thất bại. Vui lòng thử lại.",
+    "40302": "Tài khoản Google này không được phép đăng nhập.",
+    "50002": "Lỗi máy chủ. Thử lại sau vài phút."
+  }
+}
