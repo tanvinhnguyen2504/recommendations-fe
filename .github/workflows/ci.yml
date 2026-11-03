@@ -1,0 +1,40 @@
+name: CI
+
+# Pull requests only: this workflow verifies code and never deploys.
+on:
+  pull_request:
+    branches: [dev, master]
+
+# A new push to a PR replaces the check already running for it.
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # The job name is the required status check in the master ruleset, so renaming it breaks merging.
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Actions are pinned by SHA so a moved tag cannot change what runs. The comment records the version.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Must run before setup-node, whose pnpm cache needs the pnpm binary.
+      # The version comes from "packageManager" in package.json.
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Runs tsc -b then vite build, so this is also the type check.
+      # No secrets are needed, which keeps this safe for PRs from forks.
+      - name: Production test build
+        run: pnpm build

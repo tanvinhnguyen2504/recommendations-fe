@@ -1,0 +1,91 @@
+name: CD
+
+# Pushes only: direct commits and merged PRs.
+on:
+  push:
+    branches: [dev, master]
+
+# Queue rather than cancel, so an older run can never finish last and overwrite a newer deploy.
+concurrency:
+  group: cd-${{ github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # GitHub's Deployments page then records each commit and its URL per environment.
+    environment:
+      name: ${{ github.ref_name == 'master' && 'production' || 'development' }}
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Pinned so a CLI release cannot change deploy behaviour unannounced.
+      - name: Install Vercel CLI
+        run: npm install --global vercel@65.10.0
+
+      # The only place that decides between the two environments.
+      - name: Resolve deployment target
+        run: |
+          if [ "$GITHUB_REF_NAME" = "master" ]; then
+            echo "PULL_ARGS=--environment=production" >> "$GITHUB_ENV"
+            echo "PROD_FLAG=--prod" >> "$GITHUB_ENV"
+          else
+            echo "PULL_ARGS=--environment=preview --git-branch=$GITHUB_REF_NAME" >> "$GITHUB_ENV"
+            echo "PROD_FLAG=" >> "$GITHUB_ENV"
+          fi
+
+      # VITE_* values are baked in at build time, so they must be pulled before building.
+      # $PULL_ARGS and $PROD_FLAG are unquoted on purpose: they expand to zero or more arguments.
+      - name: Pull Vercel environment
+        run: vercel pull --yes $PULL_ARGS --token="$VERCEL_TOKEN"
+
+      - name: Build
+        run: vercel build $PROD_FLAG --token="$VERCEL_TOKEN"
+
+      # endpoints.ts falls back to localhost when a VITE_* URL is unset, and the build still succeeds.
+      - name: Reject builds pointing at localhost
+        run: |
+          if grep -rlE 'localhost:999[89]' .vercel/output/static; then
+            echo "::error::Bundle contains a localhost API URL. Check the Vercel environment variables."
+            exit 1
+          fi
+
+      # stdout is the deployment URL. githubDeployment and githubCommitRef link the deployment to
+      # its branch, which branch-specific domains need. githubCommitSha records the exact commit.
+      - name: Deploy
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt $PROD_FLAG --token="$VERCEL_TOKEN" \
+            --meta githubDeployment=1 \
+            --meta githubCommitRef="$GITHUB_REF_NAME" \
+            --meta githubCommitSha="$GITHUB_SHA")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Record deployment
+        run: |
+          {
+            echo "### Deployed \`$GITHUB_REF_NAME\`"
+            echo "- Commit: \`$GITHUB_SHA\`"
+            echo "- URL: ${{ steps.deploy.outputs.url }}"
+          } >> "$GITHUB_STEP_SUMMARY"
