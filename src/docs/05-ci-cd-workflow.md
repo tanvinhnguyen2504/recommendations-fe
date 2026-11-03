@@ -7,7 +7,7 @@ How code gets from a branch to Development and Production, using GitHub Actions 
 
 ## In short
 
-- **CI** runs on pull requests. It builds the code and never deploys.
+- **CI** runs on pull requests. It checks formatting, lint, types, unit tests and the build, and never deploys.
 - **CD** runs on pushes to `dev` and `master`. It builds and deploys that commit.
 - A merged PR deploys automatically, so **merging to `master` ships to production**.
 
@@ -20,13 +20,13 @@ How code gets from a branch to Development and Production, using GitHub Actions 
 
 ```mermaid
 graph TD
-    Feature[Feature branch] --> PRDev["PR into dev<br/>CI: build"]
+    Feature[Feature branch] --> PRDev["PR into dev<br/>CI checks"]
     PRDev -->|squash merge| Dev[dev branch]
     Feature -.->|direct push skips CI| Dev
     Dev --> CDDev["CD: build and deploy"]
     CDDev --> Development([Development])
 
-    Dev -->|when ready to ship| PRMaster["PR into master<br/>CI: build, required"]
+    Dev -->|when ready to ship| PRMaster["PR into master<br/>CI checks, required"]
     PRMaster -->|merge commit| Master[master branch]
     Master --> CDProd["CD: build and deploy --prod"]
     CDProd --> Production([Production])
@@ -37,13 +37,21 @@ graph TD
 
 ## CI: `.github/workflows/ci.yml`
 
-CI answers one question: does this pull request build?
+CI runs these steps in order, cheapest first, and stops at the first failure.
+
+| Step              | Command                          | Catches                           |
+| ----------------- | -------------------------------- | --------------------------------- |
+| Install           | `pnpm install --frozen-lockfile` | A lockfile out of step with `package.json` |
+| Check formatting  | `pnpm format:check`              | Code that doesn't match Prettier  |
+| Lint              | `pnpm lint`                      | ESLint errors and warnings        |
+| Type check        | `pnpm typecheck`                 | Type errors                       |
+| Unit tests        | `pnpm test`                      | Failing Vitest tests              |
+| Production build  | `pnpm build`                     | Bundling failures                 |
 
 ```mermaid
 graph LR
-    Open["PR opened or updated"] --> Install["pnpm install<br/>--frozen-lockfile"]
-    Install --> Build["pnpm build<br/>tsc -b, then vite build"]
-    Build --> Result{Passes?}
+    Open["PR opened or updated"] --> Checks["Install, format, lint,<br/>types, tests, build"]
+    Checks --> Result{All pass?}
     Result -->|Yes| Merge[Ready to merge]
     Result -->|No| Fix[Push a fix]
     Fix --> Open
@@ -51,8 +59,10 @@ graph LR
 
 - A new push to the PR cancels the run in progress.
 - CI uses no secrets, so it is safe for pull requests from forks.
-- The job is named `build`, and the `master` ruleset requires that name. Renaming it blocks merging.
-- `pnpm test`, ESLint and bundle size aren't checked yet. See [Known limits](#known-limits).
+- All steps share one job named `build`, and the `master` ruleset requires that name. Renaming it blocks merging.
+- A failed step hides any later failures, so a lint error can hide a failing test until the next run.
+- To run the same checks locally: `pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build`.
+- Bundle size isn't checked yet. See [Known limits](#known-limits).
 
 ## CD: `.github/workflows/cd.yml`
 
@@ -156,7 +166,7 @@ A new Vercel project's first deployment is always a production one, so do these 
 
 - **No gate before Production.** Any push to `master` ships immediately, with no staging step or pre-live check.
 - **`dev` has no ruleset.** A failed PR can still merge, and direct pushes deploy without CI.
-- **Checks not in CI.** `pnpm test` exits 1 because there are no test files, ESLint isn't installed, and the main chunk is 207 KB gzipped against a 170 KB budget.
+- **Bundle size isn't checked.** The main chunk is 210 KB gzipped against a 170 KB budget, and nothing stops it growing.
 - **No version numbers.** Deployments are tracked by commit hash only.
 - **No manual deploys.** CD only deploys what was just pushed, so you can't choose a commit to deploy.
 - **`*.vercel.app` domains.** Sign-in can't be fully tested on Safari or iOS. Move to a custom domain before Saved, Account or Add-a-place reach production.

@@ -1,11 +1,9 @@
 name: CI
 
-# Pull requests only: this workflow verifies code and never deploys.
 on:
   pull_request:
     branches: [dev, master]
 
-# A new push to a PR replaces the check already running for it.
 concurrency:
   group: ci-${{ github.event.pull_request.number }}
   cancel-in-progress: true
@@ -34,7 +32,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Runs tsc -b then vite build, so this is also the type check.
-      # No secrets are needed, which keeps this safe for PRs from forks.
+      - name: Check formatting
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
       - name: Production test build
         run: pnpm build

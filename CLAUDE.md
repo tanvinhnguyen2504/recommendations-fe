@@ -95,10 +95,10 @@ pnpm format:check
 GitHub Actions runs the checks and deploys with the Vercel CLI. `vercel.json` turns off Vercel's
 Git integration, so Vercel creates no deployments of its own, including PR previews.
 
-| Workflow | Trigger                   | Does                                            |
-| -------- | ------------------------- | ----------------------------------------------- |
-| `ci.yml` | PR into `dev` or `master` | `pnpm build` (includes `tsc -b`); never deploys |
-| `cd.yml` | Push to `dev` or `master` | `vercel build`, then `vercel deploy --prebuilt` |
+| Workflow | Trigger                   | Does                                                      |
+| -------- | ------------------------- | --------------------------------------------------------- |
+| `ci.yml` | PR into `dev` or `master` | Format check, lint, typecheck, test, build; never deploys |
+| `cd.yml` | Push to `dev` or `master` | `vercel build`, then `vercel deploy --prebuilt`           |
 
 | Environment | Branch   | Vercel target                   |
 | ----------- | -------- | ------------------------------- |
@@ -113,7 +113,7 @@ Git integration, so Vercel creates no deployments of its own, including PR previ
   URL, since `api/endpoints.ts` falls back to one when a variable is unset.
 - The `build` job name is the required check on `master`; renaming it blocks merging.
 - `pull_request_target` must never be used: this repo is public and `VERCEL_TOKEN` is long-lived.
-- Not in CI yet: `pnpm test` (no test files, exits 1), ESLint (not installed), bundle size.
+- Not in CI yet: bundle size.
 
 ## Routes
 
