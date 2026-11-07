@@ -28,6 +28,7 @@ the product. See §"Auth" below.
 | `README.md`                             | Screen inventory (21 artboards), build order summary      |
 | `src/docs/01-implementation-prompt.md`  | Phase-by-phase build plan, design tokens, data contracts  |
 | `src/docs/04-mobile-screen-priority.md` | Screen ranking, R1/R2/R3 slices, phone rules, sprint plan |
+| `src/docs/05-ci-cd-workflow.md`         | CI/CD workflow, everyday tasks, troubleshooting, setup    |
 
 ⚠️ **Two referenced docs do not exist on disk.** `README.md` indexes four files; only `01`
 and `04` are present:
@@ -88,6 +89,31 @@ pnpm lint:fix
 pnpm format        # prettier + Tailwind class sorting
 pnpm format:check
 ```
+
+## CI/CD
+
+GitHub Actions runs the checks and deploys with the Vercel CLI. `vercel.json` turns off Vercel's
+Git integration, so Vercel creates no deployments of its own, including PR previews.
+
+| Workflow | Trigger                   | Does                                                      |
+| -------- | ------------------------- | --------------------------------------------------------- |
+| `ci.yml` | PR into `dev` or `master` | Format check, lint, typecheck, test, build; never deploys |
+| `cd.yml` | Push to `dev` or `master` | `vercel build`, then `vercel deploy --prebuilt`           |
+
+| Environment | Branch   | Vercel target                   |
+| ----------- | -------- | ------------------------------- |
+| Development | `dev`    | Preview, `dev` branch variables |
+| Production  | `master` | Production                      |
+
+- Features merge into `dev` by squash. `dev` merges into `master` with a **merge commit**;
+  squashing there makes the branches diverge.
+- **Any push to `master` ships immediately.** Each deployment records its commit, so
+  `vercel list --meta githubCommitSha=<sha>` finds it.
+- `VITE_*` values are baked in at build time. `cd.yml` fails if a build contains a localhost API
+  URL, since `api/endpoints.ts` falls back to one when a variable is unset.
+- The `build` job name is the required check on `master`; renaming it blocks merging.
+- `pull_request_target` must never be used: this repo is public and `VERCEL_TOKEN` is long-lived.
+- Not in CI yet: bundle size.
 
 ## Routes
 
